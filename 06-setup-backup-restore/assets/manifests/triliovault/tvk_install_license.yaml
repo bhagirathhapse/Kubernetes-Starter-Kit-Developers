@@ -12,11 +12,13 @@ spec:
     spec:
       containers:
       - name: generate-tvk-license
-        image: eu.gcr.io/amazing-chalice-243510/do_license
+        image: eu.gcr.io/amazing-chalice-243510/do_license:latest
         env:
         - name: NAMESPACE
-          value: "tvk"
-        imagePullPolicy: IfNotPresent
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        imagePullPolicy: Always
       restartPolicy: Never
       schedulerName: default-scheduler
       serviceAccount: "k8s-triliovault"
